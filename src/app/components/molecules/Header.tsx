@@ -1,7 +1,6 @@
 import React from "react";
 import { Typography } from "../atoms/Typography";
 import Image from "next/image";
-import COMPANY_LOGO from "../../../assets/compnaylogo.png";
 import LOGO from "../../../assets/logo.png";
 
 const Header = () => {

@@ -7,12 +7,8 @@ import Header from "./components/molecules/Header";
 export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
       <Header />
-
-      {/* Main Content */}
       <main className="py-8 sm:py-16 px-4 sm:px-6 lg:px-8">
-        {/* Hero Section */}
         <section className="text-center px-6 mb-12 sm:mb-16">
           <Typography
             variant="heading"
@@ -21,8 +17,9 @@ export default function Home() {
             Connecting Artists with Opportunities
           </Typography>
           <Typography variant="body" className="text-gray-600 mb-8">
-            Whether you're an artist looking to showcase your work or someone
-            looking for creative talent, Zelvyn is here to bridge the gap.
+            Whether you&apos;re an artist looking to showcase your work or
+            someone looking for creative talent, Zelvyn is here to bridge the
+            gap.
           </Typography>
           <a
             href="#join"
@@ -32,7 +29,6 @@ export default function Home() {
           </a>
         </section>
 
-        {/* Features Section */}
         <section className="py-12 bg-gray-100">
           <div className="max-w-5xl mx-auto px-6 text-center">
             <Typography
@@ -46,7 +42,6 @@ export default function Home() {
               clients who appreciate creativity and originality.
             </Typography>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {/* Feature 1 */}
               <div className="p-6 bg-white shadow rounded">
                 <Typography
                   variant="subheading"
@@ -58,7 +53,6 @@ export default function Home() {
                   Showcase your portfolio, get discovered, and grow your career.
                 </Typography>
               </div>
-              {/* Feature 2 */}
               <div className="p-6 bg-white shadow rounded">
                 <Typography
                   variant="subheading"
@@ -70,7 +64,6 @@ export default function Home() {
                   Find the perfect artist for your project with ease.
                 </Typography>
               </div>
-              {/* Feature 3 */}
               <div className="p-6 bg-white shadow rounded">
                 <Typography
                   variant="subheading"
@@ -85,8 +78,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        {/* Contact Section */}
         <section id="contact" className="py-16 bg-white">
           <div className="max-w-5xl mx-auto px-6 text-center">
             <Typography
@@ -96,7 +87,7 @@ export default function Home() {
               Get in Touch
             </Typography>
             <Typography variant="body" className="text-gray-600 mb-6">
-              Want to know more? Contact us and we'll get back to you.
+              Want to know more? Contact us and we&apos;ll get back to you.
             </Typography>
             <form className="grid grid-cols-1 gap-4 sm:grid-cols-2 max-w-xl mx-auto">
               <InputBox
@@ -119,8 +110,6 @@ export default function Home() {
           </div>
         </section>
       </main>
-
-      {/* Footer */}
       <Footer />
     </div>
   );
