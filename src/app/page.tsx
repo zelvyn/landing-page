@@ -1,101 +1,127 @@
-import Image from "next/image";
+import { Button } from "./components/atoms/Button";
+import { InputBox } from "./components/atoms/InputBox";
+import { Typography } from "./components/atoms/Typography";
+import Footer from "./components/molecules/Footer";
+import Header from "./components/molecules/Header";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <Header />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      {/* Main Content */}
+      <main className="py-8 sm:py-16 px-4 sm:px-6 lg:px-8">
+        {/* Hero Section */}
+        <section className="text-center px-6 mb-12 sm:mb-16">
+          <Typography
+            variant="heading"
+            className="text-3xl sm:text-4xl text-gray-800 mb-4"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
+            Connecting Artists with Opportunities
+          </Typography>
+          <Typography variant="body" className="text-gray-600 mb-8">
+            Whether you're an artist looking to showcase your work or someone
+            looking for creative talent, Zelvyn is here to bridge the gap.
+          </Typography>
           <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#join"
+            className="bg-indigo-600 text-white px-6 py-3 rounded hover:bg-indigo-700 inline-block"
           >
-            Read our docs
+            Get Started
           </a>
-        </div>
+        </section>
+
+        {/* Features Section */}
+        <section className="py-12 bg-gray-100">
+          <div className="max-w-5xl mx-auto px-6 text-center">
+            <Typography
+              variant="subheading"
+              className="text-2xl font-bold text-gray-800 mb-4"
+            >
+              What We Offer
+            </Typography>
+            <Typography variant="body" className="text-gray-600 mb-6">
+              Zelvyn provides a platform to connect talented artists with
+              clients who appreciate creativity and originality.
+            </Typography>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Feature 1 */}
+              <div className="p-6 bg-white shadow rounded">
+                <Typography
+                  variant="subheading"
+                  className="text-lg font-semibold text-indigo-600"
+                >
+                  For Artists
+                </Typography>
+                <Typography variant="body" className="mt-2 text-gray-600">
+                  Showcase your portfolio, get discovered, and grow your career.
+                </Typography>
+              </div>
+              {/* Feature 2 */}
+              <div className="p-6 bg-white shadow rounded">
+                <Typography
+                  variant="subheading"
+                  className="text-lg font-semibold text-indigo-600"
+                >
+                  For Clients
+                </Typography>
+                <Typography variant="body" className="mt-2 text-gray-600">
+                  Find the perfect artist for your project with ease.
+                </Typography>
+              </div>
+              {/* Feature 3 */}
+              <div className="p-6 bg-white shadow rounded">
+                <Typography
+                  variant="subheading"
+                  className="text-lg font-semibold text-indigo-600"
+                >
+                  Simple Connections
+                </Typography>
+                <Typography variant="body" className="mt-2 text-gray-600">
+                  Seamlessly connect, communicate, and collaborate.
+                </Typography>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Section */}
+        <section id="contact" className="py-16 bg-white">
+          <div className="max-w-5xl mx-auto px-6 text-center">
+            <Typography
+              variant="subheading"
+              className="text-2xl font-bold text-gray-800 mb-4"
+            >
+              Get in Touch
+            </Typography>
+            <Typography variant="body" className="text-gray-600 mb-6">
+              Want to know more? Contact us and we'll get back to you.
+            </Typography>
+            <form className="grid grid-cols-1 gap-4 sm:grid-cols-2 max-w-xl mx-auto">
+              <InputBox
+                placeholder="Your Name"
+                className="p-3 border rounded w-full"
+              />
+              <InputBox
+                placeholder="Your Email"
+                className="p-3 border rounded w-full"
+              />
+              <textarea
+                placeholder="Your Message"
+                className="p-3 border rounded sm:col-span-2 w-full"
+                rows={4}
+              ></textarea>
+              <Button variant="primary" className="sm:col-span-2 py-3 w-full">
+                Send Message
+              </Button>
+            </form>
+          </div>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
