@@ -1,13 +1,10 @@
+
 "use client";
 import React from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
 import { IoMenu } from "react-icons/io5";
-import { Typography } from "../atoms/Typography";
-import Image from "next/image";
-import LOGO from "../../../assets/logo.png";
-import config from "../../../../tailwind.config";
+import Logo from "../atoms/Logo";
 
-// Menu items defined in a JSON-like format
 const menuItems = [
   { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
@@ -19,35 +16,22 @@ const menuItems = [
 interface HeaderProps {
   isMenuOpen: boolean;
   setIsMenuOpen: (open: boolean) => void;
+  onNavClick: (sectionId: string) => void; // added onNavClick prop
 }
 
-const Header: React.FC<HeaderProps> = ({ isMenuOpen, setIsMenuOpen }) => {
+const Header: React.FC<HeaderProps> = ({ isMenuOpen, setIsMenuOpen, onNavClick }) => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <header className="bg-white shadow sticky top-0 z-50">
+    <header className="bg-gradient-to-r from-indigo-600 to-[#383961] shadow sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-4">
-        <div className="flex items-center gap-x-2">
-          <Image
-            className="w-8 h-auto sm:w-16 md:w-20 lg:w-14"
-            width={0}
-            height={0}
-            alt="Zelvyn Logo"
-            src={LOGO}
-          />
-          <Typography
-            variant="heading"
-            className="lg:text-3xl text-[1.5rem] text-secondary"
-          >
-            Zelvyn
-          </Typography>
-        </div>
+        <Logo />
 
         <button className="lg:hidden" onClick={toggleMenu}>
           {isMenuOpen ? (
-            <FaTimes size={"24"} color="#383961" />
+            <FaTimes size={"24"} color="#ffffff" />
           ) : (
-            <IoMenu size={"30"} color="#383961" />
+            <IoMenu size={"30"} color="#ffffff" />
           )}
         </button>
 
@@ -58,14 +42,19 @@ const Header: React.FC<HeaderProps> = ({ isMenuOpen, setIsMenuOpen }) => {
               href={item.href}
               className={`${
                 item.isPrimary
-                  ? "bg-indigo-600 text-white px-4 py-2 rounded transition-all duration-200 hover:bg-indigo-700 hover:shadow-lg transform hover:scale-105"
-                  : "text-gray-800 hover:text-indigo-600 transition-colors duration-200"
+                  ? "bg-white text-indigo-600 px-4 py-2 rounded transition-all duration-200 hover:bg-gray-400 hover:shadow-lg transform hover:scale-105"
+                  : "text-white hover:text-gray-300 transition-colors duration-200"
               }`}
+              onClick={(e) => {
+                e.preventDefault();
+                onNavClick(item.href.replace('#', '')); // Call onNavClick when a menu item is clicked
+              }}
             >
               {item.name}
             </a>
           ))}
         </nav>
+
         {isMenuOpen && (
           <div className="lg:hidden absolute top-16 left-0 right-0 bg-white shadow-md py-4 px-6 flex flex-col space-y-4 z-40">
             {menuItems.map((item, index) => (
@@ -74,10 +63,14 @@ const Header: React.FC<HeaderProps> = ({ isMenuOpen, setIsMenuOpen }) => {
                 href={item.href}
                 className={`${
                   item.isPrimary
-                    ? "bg-indigo-600 text-white px-4 py-2 rounded  "
-                    : "text-gray-800 "
-                } text-sm `}
-                onClick={toggleMenu}
+                    ? "bg-indigo-600 text-white px-4 py-2 rounded"
+                    : "text-gray-800"
+                } text-sm`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavClick(item.href.replace('#', '')); // Handle navigation for mobile menu as well
+                  toggleMenu();
+                }}
               >
                 {item.name}
               </a>
