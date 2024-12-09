@@ -1,5 +1,5 @@
-
 import { Typography } from "../atoms/Typography";
+import Image from "next/image";  // Import Image from next/image
 import BGCover from "../../../assets/artist1.jpg";
 
 const HeroSection = () => {
@@ -7,11 +7,13 @@ const HeroSection = () => {
     <div className="hero-section relative min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
       {/* Background Image Container */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
-        <img
-          src={BGCover.src}
+        <Image
+          src={BGCover}  // Use Image component here
           alt="Creative professionals collaborating"
-          className="w-full h-full object-cover object-top opacity-40 
-                     transform scale-105 animate-slow-zoom"
+          layout="fill"  // Ensures it covers the container size
+          objectFit="cover"  // Keeps aspect ratio and fills container
+          objectPosition="top"  // Adjusts image positioning
+          className="opacity-40 transform scale-105 animate-slow-zoom"
         />
         
         {/* Gradient Overlays */}
@@ -52,8 +54,8 @@ const HeroSection = () => {
                        animate-fade-in-up-delay-2 font-light
                        tracking-wide"
           >
-             At Zelvyn, we connect creative professionals with clients who need their talents. 
-            Whether you're an artist looking to showcase your skills or a client searching 
+            At Zelvyn, we connect creative professionals with clients who need their talents. 
+            Whether you&apos;re an artist looking to showcase your skills or a client searching 
             for the perfect fit, our platform makes it simple to find what you need.
           </Typography>
 
