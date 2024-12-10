@@ -72,7 +72,7 @@ const HeroSection = () => {
               Explore Features
             </a>
             <a
-              href="#join"
+              href="#contact"
               className="px-8 py-3 bg-transparent border-2 border-indigo-500/50 
                          rounded-lg text-indigo-300 font-medium
                          transform transition-all duration-300

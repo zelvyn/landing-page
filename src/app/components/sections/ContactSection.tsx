@@ -16,12 +16,11 @@ export default function ContactSection() {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
-  
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const endpoint = "https://example.com/contact"; // Replace with your endpoint
-
+    const endpoint = "/api/contact"; // Ensure this matches the API route
+  
     try {
       const response = await fetch(endpoint, {
         method: "POST",
@@ -30,7 +29,7 @@ export default function ContactSection() {
         },
         body: JSON.stringify(formData),
       });
-
+  
       if (response.ok) {
         alert("Message sent successfully!");
         setFormData({

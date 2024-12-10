@@ -10,7 +10,7 @@ const menuItems = [
   // { name: "About", href: "#about" },
   { name: "Services", href: "#features" },
   { name: "Contact", href: "#contact" },
-  { name: "Join Us", href: "#join", isPrimary: true },
+  // { name: "Join Us", href: "#join", isPrimary: true },
 ];
 
 interface HeaderProps {
