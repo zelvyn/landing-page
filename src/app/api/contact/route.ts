@@ -1,11 +1,18 @@
 import { NextResponse } from "next/server";
 import sqlite3 from "sqlite3";
 import { open } from "sqlite";
+import path from "path";
 
 // Helper function to open the SQLite database
 async function openDb() {
+  // Use a temporary directory in production
+  const dbPath =
+    process.env.NODE_ENV === "production"
+      ? path.join("/tmp", "database.sqlite") // Vercel's writable directory
+      : path.join(process.cwd(), "src", "db", "database.sqlite"); // Local directory
+
   return open({
-    filename: "./database.sqlite", // Specify the database file
+    filename: dbPath,
     driver: sqlite3.Database,
   });
 }
@@ -60,7 +67,9 @@ export async function GET() {
     const db = await openDb();
 
     // Fetch all responses
-    const responses = await db.all("SELECT * FROM responses ORDER BY createdAt DESC");
+    const responses = await db.all(
+      "SELECT * FROM responses ORDER BY createdAt DESC"
+    );
 
     return NextResponse.json(responses);
   } catch (error) {
