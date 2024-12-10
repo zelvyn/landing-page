@@ -3,18 +3,33 @@ import sqlite3 from "sqlite3";
 import { open } from "sqlite";
 import path from "path";
 
-// Helper function to open the SQLite database
+// Helper function to open the SQLite database and initialize tables
 async function openDb() {
-  // Use a temporary directory in production
+  // Define the database path depending on the environment
   const dbPath =
     process.env.NODE_ENV === "production"
-      ? path.join("/tmp", "database.sqlite") // Vercel's writable directory
-      : path.join(process.cwd(), "src", "db", "database.sqlite"); // Local directory
+      ? path.join("/tmp", "database.sqlite") // Use Vercel's writable temporary directory
+      : path.join(process.cwd(), "src", "db", "database.sqlite"); // Use local directory for development
 
-  return open({
+  // Open the SQLite database
+  const db = await open({
     filename: dbPath,
     driver: sqlite3.Database,
   });
+
+  // Ensure the `responses` table exists
+  await db.run(`
+    CREATE TABLE IF NOT EXISTS responses (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT,
+      email TEXT,
+      contactNumber TEXT,
+      message TEXT,
+      createdAt TEXT
+    )
+  `);
+
+  return db;
 }
 
 // Handle POST requests
@@ -23,7 +38,7 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { name, email, contactNumber, message } = body;
 
-    // Validate required fields
+    // Validate the required fields
     if (!name || !email || !contactNumber || !message) {
       return NextResponse.json(
         { error: "All fields are required" },
@@ -31,21 +46,10 @@ export async function POST(req: Request) {
       );
     }
 
+    // Open the database
     const db = await openDb();
 
-    // Ensure the table exists
-    await db.run(`
-      CREATE TABLE IF NOT EXISTS responses (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT,
-        email TEXT,
-        contactNumber TEXT,
-        message TEXT,
-        createdAt TEXT
-      )
-    `);
-
-    // Insert data into the database
+    // Insert the data into the `responses` table
     await db.run(
       "INSERT INTO responses (name, email, contactNumber, message, createdAt) VALUES (?, ?, ?, ?, ?)",
       [name, email, contactNumber, message, new Date().toISOString()]
@@ -64,9 +68,10 @@ export async function POST(req: Request) {
 // Handle GET requests
 export async function GET() {
   try {
+    // Open the database
     const db = await openDb();
 
-    // Fetch all responses
+    // Fetch all responses from the `responses` table
     const responses = await db.all(
       "SELECT * FROM responses ORDER BY createdAt DESC"
     );
