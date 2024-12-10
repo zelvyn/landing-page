@@ -1,6 +1,6 @@
 import React from "react";
 
-interface InputBoxProps {
+interface InputBoxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -12,6 +12,7 @@ export const InputBox: React.FC<InputBoxProps> = ({
   value,
   onChange,
   className,
+  ...rest
 }) => {
   const baseStyle =
     "w-full px-4 py-2 border rounded text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary";
@@ -23,6 +24,7 @@ export const InputBox: React.FC<InputBoxProps> = ({
       value={value}
       onChange={onChange}
       className={`${baseStyle} ${className}`}
+      {...rest}
     />
   );
 };

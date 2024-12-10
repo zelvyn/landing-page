@@ -38,7 +38,7 @@ const HeroSection = () => {
             
             <Typography 
               variant="subheading"
-              className="text-xl sm:text-2xl md:text-3xl text-indigo-200/90
+              className="text-xl sm:text-2xl md:text-3xl text-indigo-200
                          font-light tracking-wide animate-fade-in-up-delay
                          max-w-2xl mx-auto"
             >
@@ -49,7 +49,7 @@ const HeroSection = () => {
           {/* Description - More Concise */}
           <Typography 
             variant="body" 
-            className="text-base sm:text-lg text-gray-300/90 
+            className="text-base sm:text-lg text-stone-400 
                        max-w-xl mx-auto leading-relaxed 
                        animate-fade-in-up-delay-2 font-light
                        tracking-wide"
@@ -65,11 +65,10 @@ const HeroSection = () => {
             <a
               href="#features"
               className="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 
-                         rounded-lg text-white font-medium 
-                         transform transition-all duration-300
-                         hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/25
-                         focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-            >
+             rounded-lg text-white font-medium 
+             transform transition-all duration-300
+             hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/25
+             focus:ring-2 focus:ring-indigo-500 focus:outline-none">
               Explore Features
             </a>
             <a

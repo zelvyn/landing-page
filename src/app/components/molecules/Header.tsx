@@ -7,8 +7,8 @@ import Logo from "../atoms/Logo";
 
 const menuItems = [
   { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Services", href: "#services" },
+  // { name: "About", href: "#about" },
+  { name: "Services", href: "#features" },
   { name: "Contact", href: "#contact" },
   { name: "Join Us", href: "#join", isPrimary: true },
 ];
@@ -23,7 +23,7 @@ const Header: React.FC<HeaderProps> = ({ isMenuOpen, setIsMenuOpen, onNavClick }
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <header className="bg-gradient-to-r from-indigo-600 to-[#383961] shadow sticky top-0 z-50">
+    <header className="bg-gradient-to-r from-indigo-600 to-purple-600  shadow sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-4">
         <Logo />
 

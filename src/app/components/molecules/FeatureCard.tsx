@@ -28,7 +28,7 @@ export default function FeatureCard({
           >
             {title}
           </Typography>
-          <div className="h-0.5 w-16 bg-gradient-to-r from-pink-500 to-indigo-500 
+          <div className="h-0.5 w-24 bg-gradient-to-r from-pink-500 to-indigo-500 
                          rounded-full transform origin-left group-hover:scale-x-125 transition-transform" />
         </div>
 
