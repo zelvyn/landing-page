@@ -2,10 +2,16 @@ import React from "react";
 import Image from "next/image";
 import { Typography } from "../atoms/Typography";
 import LOGO from "../../../assets/logo.png";
+import { motion } from "framer-motion";
+import { scaleIn } from "@/utils/animation";
 
 const Logo: React.FC = () => {
   return (
-    <div className="flex items-center gap-x-2">
+    <motion.div
+      variants={scaleIn}
+      whileHover={{ scale: 1.05 }}
+      className="flex items-center gap-x-2"
+    >
       <Image
         className="w-8 h-auto sm:w-16 md:w-20 lg:w-14"
         width={0}
@@ -20,14 +26,11 @@ const Logo: React.FC = () => {
         >
           Zelvyn
         </Typography>
-        <Typography
-          variant="body"
-          className="text-xs   text-white"
-        >
+        <Typography variant="body" className="text-xs   text-white">
           Artists United
         </Typography>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

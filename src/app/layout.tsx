@@ -3,8 +3,16 @@ import "./globals.css";
 import Head from "next/head";
 
 export const metadata: Metadata = {
-  title: "Zelvyn",
-  description: "Connecting artists with people looking for creative talent",
+  title: "Zelvyn | Hire Custom Portrait Artists in India",
+  description:
+    "Zelvyn connects talented artists with clients looking for custom portraits and artwork. Affordable, verified, and secure.",
+  keywords: "custom portraits, artists india, commission artwork, digital art",
+  openGraph: {
+    title: "Zelvyn | Custom Portrait Artists in India",
+    description:
+      "Connect with talented artists for custom portraits and artwork",
+    images: ["/og-image.jpg"],
+  },
 };
 
 export default function RootLayout({

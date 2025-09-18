@@ -1,9 +1,7 @@
-
-
-"use client"
-import { useEffect, useState } from 'react';
-import { Typography } from '../components/atoms/Typography';
-import moment from 'moment';
+"use client";
+import { useEffect, useState } from "react";
+import { Typography } from "../components/atoms/Typography";
+import moment from "moment";
 
 interface ResponseData {
   id: number;
@@ -21,11 +19,11 @@ const ResponsesTablePage = () => {
   useEffect(() => {
     const fetchResponses = async () => {
       try {
-        const res = await fetch('/api/contact');
+        const res = await fetch("/api/contact");
         const data: ResponseData[] = await res.json();
         setResponses(data);
       } catch (error) {
-        console.error('Failed to fetch responses:', error);
+        console.error("Failed to fetch responses:", error);
       } finally {
         setIsLoading(false);
       }
@@ -39,17 +37,14 @@ const ResponsesTablePage = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Header Section */}
         <div className="mb-8">
-          <Typography 
+          <Typography
             variant="heading"
             className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-[#383961] 
                        text-transparent bg-clip-text mb-2"
           >
             Contact Form Responses
           </Typography>
-          <Typography
-            variant="body"
-            className="text-gray-600"
-          >
+          <Typography variant="body" className="text-gray-600">
             View and manage all contact form submissions
           </Typography>
         </div>
@@ -61,10 +56,7 @@ const ResponsesTablePage = () => {
           </div>
         ) : responses.length === 0 ? (
           <div className="bg-white rounded-lg shadow-md p-8 text-center">
-            <Typography
-              variant="body"
-              className="text-gray-600"
-            >
+            <Typography variant="body" className="text-gray-600">
               No responses yet.
             </Typography>
           </div>
@@ -75,36 +67,51 @@ const ResponsesTablePage = () => {
                 <thead className="bg-gradient-to-r from-indigo-600 to-[#383961]">
                   <tr>
                     <th className="px-6 py-4">
-                      <Typography variant="body" className="text-white font-medium text-left">
+                      <Typography
+                        variant="body"
+                        className="text-white font-medium text-left"
+                      >
                         Name
                       </Typography>
                     </th>
                     <th className="px-6 py-4">
-                      <Typography variant="body" className="text-white font-medium text-left">
+                      <Typography
+                        variant="body"
+                        className="text-white font-medium text-left"
+                      >
                         Email
                       </Typography>
                     </th>
                     <th className="px-6 py-4">
-                      <Typography variant="body" className="text-white font-medium text-left">
+                      <Typography
+                        variant="body"
+                        className="text-white font-medium text-left"
+                      >
                         Contact Number
                       </Typography>
                     </th>
                     <th className="px-6 py-4">
-                      <Typography variant="body" className="text-white font-medium text-left">
+                      <Typography
+                        variant="body"
+                        className="text-white font-medium text-left"
+                      >
                         Message
                       </Typography>
                     </th>
                     <th className="px-6 py-4">
-                      <Typography variant="body" className="text-white font-medium text-left">
+                      <Typography
+                        variant="body"
+                        className="text-white font-medium text-left"
+                      >
                         Date
                       </Typography>
                     </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
-                  {responses.map((response) => (
-                    <tr 
-                      key={response.id} 
+                  {responses?.map((response) => (
+                    <tr
+                      key={response.id}
                       className="hover:bg-gray-50 transition-colors duration-200"
                     >
                       <td className="px-6 py-4">
