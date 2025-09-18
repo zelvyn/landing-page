@@ -1,6 +1,10 @@
 import { Metadata } from "next";
 import "./globals.css";
 import Head from "next/head";
+import { Inter, Playfair_Display } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
+const playfair = Playfair_Display({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Zelvyn | Hire Custom Portrait Artists in India",
@@ -28,7 +32,9 @@ export default function RootLayout({
         {/* Favicon link */}
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <body className="font-sans antialiased">{children}</body>
+      <body className={`${inter.className} ${playfair.className}`}>
+        {children}
+      </body>
     </html>
   );
 }

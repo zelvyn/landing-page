@@ -15,6 +15,13 @@ const testimonials = [
     quote:
       "Zelvyn has helped me connect with clients who truly value art. Great platform for professional artists!",
   },
+  {
+    name: "Anjali K.",
+    role: "Client",
+    image: "/avatars/client2.jpg",
+    quote:
+      "Working with artists through Zelvyn has been amazing. The talent on this platform is top-notch!",
+  },
 ];
 
 const stats = [
@@ -61,7 +68,7 @@ export default function TestimonialsSection() {
                 </div>
               </div>
               <Typography variant="body" className="text-gray-700 italic">
-                "{testimonial.quote}"
+                {testimonial.quote}
               </Typography>
             </div>
           ))}

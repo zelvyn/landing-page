@@ -1,5 +1,4 @@
 import { Typography } from "../atoms/Typography";
-import FeatureCard from "../molecules/FeatureCard";
 import { motion } from "framer-motion";
 import { Playfair_Display } from "next/font/google";
 
