@@ -2,9 +2,13 @@
 
 import { cn } from "@/utils/helpers";
 import { motion } from "framer-motion";
-import { InputHTMLAttributes, forwardRef, useState } from "react";
+import { InputHTMLAttributes, TextareaHTMLAttributes, forwardRef, useState } from "react";
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface InputProps
+  extends Omit<
+    InputHTMLAttributes<HTMLInputElement>,
+    "onDrag" | "onDragEnd" | "onDragStart" | "onAnimationStart" | "onAnimationEnd" | "onAnimationIteration"
+  > {
   label?: string;
   error?: string;
   helperText?: string;
@@ -13,7 +17,10 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ label, error, helperText, leftIcon, rightIcon, className, ...props }, ref) => {
+  (
+    { label, error, helperText, leftIcon, rightIcon, className, ...props },
+    ref
+  ) => {
     const [isFocused, setIsFocused] = useState(false);
 
     return (
@@ -27,14 +34,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             {label}
           </motion.label>
         )}
-        
+
         <div className="relative">
           {leftIcon && (
             <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400">
               {leftIcon}
             </div>
           )}
-          
+
           <motion.input
             ref={ref}
             onFocus={() => setIsFocused(true)}
@@ -49,14 +56,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             )}
             {...props}
           />
-          
+
           {rightIcon && (
             <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-neutral-400">
               {rightIcon}
             </div>
           )}
         </div>
-        
+
         {(error || helperText) && (
           <motion.p
             initial={{ opacity: 0, y: -5 }}
@@ -76,8 +83,18 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
 Input.displayName = "Input";
 
-export const Textarea = forwardRef<HTMLTextAreaElement, 
-  Omit<InputProps, "leftIcon" | "rightIcon"> & { rows?: number }
+interface TextareaProps extends Omit<
+  TextareaHTMLAttributes<HTMLTextAreaElement>,
+  "onDrag" | "onDragEnd" | "onDragStart" | "onAnimationStart" | "onAnimationEnd" | "onAnimationIteration"
+> {
+  label?: string;
+  error?: string;
+  helperText?: string;
+}
+
+export const Textarea = forwardRef<
+  HTMLTextAreaElement,
+  TextareaProps
 >(({ label, error, helperText, className, rows = 4, ...props }, ref) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -92,7 +109,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement,
           {label}
         </motion.label>
       )}
-      
+
       <motion.textarea
         ref={ref}
         rows={rows}
@@ -106,7 +123,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement,
         )}
         {...props}
       />
-      
+
       {(error || helperText) && (
         <motion.p
           initial={{ opacity: 0, y: -5 }}

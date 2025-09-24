@@ -4,7 +4,7 @@ import { cn } from "@/utils/helpers";
 import { motion } from "framer-motion";
 import { InputHTMLAttributes, forwardRef, useState } from "react";
 
-interface PasswordInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
+interface PasswordInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'onDrag' | 'onDragEnd' | 'onDragStart' | 'onAnimationStart' | 'onAnimationEnd' | 'onAnimationIteration'> {
   label?: string;
   error?: string;
   helperText?: string;

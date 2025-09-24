@@ -85,9 +85,10 @@ const getArtistData = async (username: string) => {
 export async function generateMetadata({
   params,
 }: {
-  params: { username: string };
+  params: Promise<{ username: string }>;
 }): Promise<Metadata> {
-  const artist = await getArtistData(params.username);
+  const { username } = await params;
+  const artist = await getArtistData(username);
 
   if (!artist) {
     return {
@@ -123,9 +124,10 @@ export async function generateMetadata({
 export default async function ArtistPage({
   params,
 }: {
-  params: { username: string };
+  params: Promise<{ username: string }>;
 }) {
-  const artist = await getArtistData(params.username);
+  const { username } = await params;
+  const artist = await getArtistData(username);
 
   if (!artist) {
     notFound();
