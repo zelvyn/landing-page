@@ -1,6 +1,8 @@
 import Image from "next/image";
 import LOGO from "@/assets/images/zelvyn.png";
 import { H1 } from "./Typography";
+import Link from "next/link";
+import { ROUTES } from "@/utils/constants";
 interface LogoProps {
   size?: number | "small" | "medium" | "large";
   title?: boolean;
@@ -26,11 +28,15 @@ const getSizeValue = (
 export const Logo = ({ size = "medium", className, title }: LogoProps) => {
   const sizeValue = getSizeValue(size);
   return (
-    <div className="flex items-center space-x-3">
+    <Link
+      href={ROUTES.HOME}
+      className="inline-flex items-center space-x-2"
+    >
       <Image
         src={LOGO}
         alt="Zelvyn Logo"
-        style={{ width: sizeValue, height: sizeValue }}
+        width={sizeValue}
+        height={sizeValue}
         className={className}
       />
       {title && (
@@ -38,6 +44,6 @@ export const Logo = ({ size = "medium", className, title }: LogoProps) => {
           Zelvyn
         </H1>
       )}
-    </div>
+    </Link>
   );
 };

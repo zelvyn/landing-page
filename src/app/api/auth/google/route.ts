@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { API_ENDPOINTS } from '@/utils/constants';
 
 export async function POST(request: NextRequest) {
   try {
@@ -12,7 +13,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Call your backend service
-    const backendResponse = await fetch(`${process.env.BACKEND_URL}/api/auth/google`, {
+    const backendResponse = await fetch(`${process.env.BACKEND_URL}${API_ENDPOINTS.AUTH.GOOGLE}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

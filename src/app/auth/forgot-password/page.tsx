@@ -5,9 +5,10 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
-import { H2, Body, Caption } from "@/components/Typography";
+import { H2, Body, H3 } from "@/components/Typography";
 import { validateEmail } from "@/utils/helpers";
-import { ROUTES, ANIMATION_VARIANTS } from "@/utils/constants";
+import { ROUTES, ANIMATION_VARIANTS, API_ENDPOINTS } from "@/utils/constants";
+import { Logo } from "@/components/Logo";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
@@ -17,31 +18,32 @@ export default function ForgotPasswordPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!email) {
       setError("Email is required");
       return;
     }
-    
+
     if (!validateEmail(email)) {
       setError("Please enter a valid email");
       return;
     }
-    
+
     setIsLoading(true);
     setError("");
-    
+
     try {
-      const response = await fetch("/api/auth/forgot-password", {
+      const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:8080';
+      const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.AUTH.FORGOT_PASSWORD}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email }),
       });
-      
+
       const result = await response.json();
-      
+
       if (response.ok) {
         setIsSuccess(true);
       } else {
@@ -73,22 +75,31 @@ export default function ForgotPasswordPage() {
             className="bg-white rounded-3xl shadow-xl p-8 text-center"
           >
             <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              <svg
+                className="w-8 h-8 text-green-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 13l4 4L19 7"
+                />
               </svg>
             </div>
-            
+
             <H2 className="mb-4 text-green-600">Check Your Email</H2>
             <Body className="text-neutral-600 mb-6">
-              We've sent a password reset link to <strong>{email}</strong>. 
-              Please check your email and follow the instructions to reset your password.
+              We've sent a password reset link to <strong>{email}</strong>.
+              Please check your email and follow the instructions to reset your
+              password.
             </Body>
-            
+
             <div className="space-y-3">
               <Link href={ROUTES.LOGIN}>
-                <Button className="w-full">
-                  Back to Login
-                </Button>
+                <Button className="w-full">Back to Login</Button>
               </Link>
               <button
                 onClick={() => {
@@ -120,11 +131,9 @@ export default function ForgotPasswordPage() {
         >
           {/* Header */}
           <div className="text-center mb-8">
-            <Link href={ROUTES.HOME} className="inline-flex items-center space-x-2 mb-6">
-              <div className="w-8 h-8 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-lg" />
-              <span className="text-xl font-bold text-neutral-900">Zelvyn</span>
-            </Link>
-            <H2 className="mb-2">Forgot Password?</H2>
+            <Logo title />
+
+            <H3 className="mb-2">Forgot Password?</H3>
             <Body className="text-neutral-600">
               No worries! Enter your email and we'll send you a reset link.
             </Body>
@@ -140,8 +149,18 @@ export default function ForgotPasswordPage() {
               onChange={handleEmailChange}
               error={error}
               leftIcon={
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+                  />
                 </svg>
               }
             />

@@ -133,21 +133,31 @@ export default function LoginPage() {
             </Body>
           </div>
           {/* Google Login */}
-          <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-            <div className="mb-6">
-              <div className="[&>div]:w-full [&>div>div]:w-full [&>div>div>div]:w-full [&>div>div>div]:rounded-2xl [&>div>div>div]:border-2 [&>div>div>div]:border-neutral-200 [&>div>div>div]:hover:border-primary-300 [&>div>div>div]:transition-all [&>div>div>div]:duration-200 [&>div>div>div]:shadow-sm [&>div>div>div]:hover:shadow-md">
+          {GOOGLE_CLIENT_ID ? (
+            <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+              <div className="mb-6">
                 <GoogleLogin
                   onSuccess={handleGoogleLogin}
-                  onError={() => setErrors({ general: "Google login failed" })}
+                  onError={() => {
+                    console.error("Google login error");
+                    setErrors({
+                      general: "Google login temporarily unavailable",
+                    });
+                  }}
                   size="large"
-                  width="100%"
                   text="signin_with"
                   shape="rectangular"
                   theme="outline"
                 />
               </div>
+            </GoogleOAuthProvider>
+          ) : (
+            <div className="mb-6 p-3 bg-yellow-50 border border-yellow-200 rounded-xl">
+              <Caption className="text-yellow-600">
+                Google Sign-In temporarily unavailable
+              </Caption>
             </div>
-          </GoogleOAuthProvider>
+          )}
           {/* Divider */}
           <div className="relative mb-6">
             <div className="absolute inset-0 flex items-center">

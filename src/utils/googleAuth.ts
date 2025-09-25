@@ -1,4 +1,11 @@
-export const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!;
+import { API_ENDPOINTS } from "./constants";
+
+export const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
+const BACKEND_URL = process.env.BACKEND_URL || "http://localhost:8080";
+
+if (typeof window !== "undefined" && !GOOGLE_CLIENT_ID) {
+  console.error("NEXT_PUBLIC_GOOGLE_CLIENT_ID is not set");
+}
 
 export interface GoogleUser {
   id: string;
@@ -20,7 +27,7 @@ export const handleGoogleAuth = async (
   userType: "ARTIST" | "USER"
 ): Promise<AuthResponse> => {
   try {
-    const response = await fetch("/api/auth/google", {
+    const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.AUTH.GOOGLE}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,7 +46,7 @@ export const handleGoogleAuth = async (
 
     return {
       success: true,
-      user: result.user,
+      user: result.data,
     };
   } catch (error) {
     return {
@@ -56,13 +63,16 @@ export const handleEmailAuth = async (
   additionalData?: { name?: string; userType?: string }
 ): Promise<AuthResponse> => {
   try {
-    const endpoint = type === "login" ? "/api/auth/login" : "/api/auth/signup";
+    const endpoint =
+      type === "login" ? API_ENDPOINTS.AUTH.LOGIN : API_ENDPOINTS.AUTH.SIGNUP;
     const body =
       type === "login"
         ? { email, password }
         : { email, password, ...additionalData };
 
-    const response = await fetch(endpoint, {
+    const fullUrl = `${BACKEND_URL}${endpoint}`;
+
+    const response = await fetch(fullUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -81,7 +91,7 @@ export const handleEmailAuth = async (
 
     return {
       success: true,
-      user: result.user,
+      user: result.data,
     };
   } catch (error) {
     return {

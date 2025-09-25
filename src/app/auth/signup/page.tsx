@@ -6,9 +6,14 @@ import { motion } from "framer-motion";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
+import { PasswordInput } from "@/components/PasswordInput";
 import { H2, Body, Caption } from "@/components/Typography";
 import { useUserStore } from "@/store/useUserStore";
-import { handleGoogleAuth, handleEmailAuth, GOOGLE_CLIENT_ID } from "@/utils/googleAuth";
+import {
+  handleGoogleAuth,
+  handleEmailAuth,
+  GOOGLE_CLIENT_ID,
+} from "@/utils/googleAuth";
 import { validateEmail, validatePassword } from "@/utils/helpers";
 import { ROUTES, ANIMATION_VARIANTS } from "@/utils/constants";
 
@@ -32,44 +37,44 @@ export default function SignupPage() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
     // Clear error when user starts typing
     if (errors[name as keyof typeof errors]) {
-      setErrors(prev => ({ ...prev, [name]: undefined }));
+      setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
   };
 
   const handleUserTypeChange = (userType: "USER" | "ARTIST") => {
-    setFormData(prev => ({ ...prev, userType }));
+    setFormData((prev) => ({ ...prev, userType }));
   };
 
   const validateForm = () => {
     const newErrors: typeof errors = {};
-    
+
     if (!formData.name.trim()) {
       newErrors.name = "Name is required";
     } else if (formData.name.trim().length < 2) {
       newErrors.name = "Name must be at least 2 characters";
     }
-    
+
     if (!formData.email) {
       newErrors.email = "Email is required";
     } else if (!validateEmail(formData.email)) {
       newErrors.email = "Please enter a valid email";
     }
-    
+
     if (!formData.password) {
       newErrors.password = "Password is required";
     } else if (!validatePassword(formData.password)) {
       newErrors.password = "Password must be at least 6 characters";
     }
-    
+
     if (!formData.confirmPassword) {
       newErrors.confirmPassword = "Please confirm your password";
     } else if (formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = "Passwords do not match";
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -77,10 +82,10 @@ export default function SignupPage() {
   const handleEmailSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) return;
-    
+
     setIsLoading(true);
     setErrors({});
-    
+
     try {
       const result = await handleEmailAuth(
         formData.email,
@@ -91,10 +96,11 @@ export default function SignupPage() {
           userType: formData.userType,
         }
       );
-      
+
       if (result.success && result.user) {
         setUser(result.user);
-        window.location.href = result.user.userType === "ARTIST" ? ROUTES.DASHBOARD : "/";
+        window.location.href =
+          result.user.userType === "ARTIST" ? ROUTES.DASHBOARD : "/";
       } else {
         setErrors({ general: result.error || "Signup failed" });
       }
@@ -107,16 +113,20 @@ export default function SignupPage() {
 
   const handleGoogleSignup = async (credentialResponse: any) => {
     if (!credentialResponse.credential) return;
-    
+
     setIsLoading(true);
     setErrors({});
-    
+
     try {
-      const result = await handleGoogleAuth(credentialResponse.credential, formData.userType);
-      
+      const result = await handleGoogleAuth(
+        credentialResponse.credential,
+        formData.userType
+      );
+
       if (result.success && result.user) {
         setUser(result.user);
-        window.location.href = result.user.userType === "ARTIST" ? ROUTES.DASHBOARD : "/";
+        window.location.href =
+          result.user.userType === "ARTIST" ? ROUTES.DASHBOARD : "/";
       } else {
         setErrors({ general: result.error || "Google signup failed" });
       }
@@ -141,17 +151,24 @@ export default function SignupPage() {
         >
           {/* Header */}
           <div className="text-center mb-8">
-            <Link href={ROUTES.HOME} className="inline-flex items-center space-x-2 mb-6">
+            <Link
+              href={ROUTES.HOME}
+              className="inline-flex items-center space-x-2 mb-6"
+            >
               <div className="w-8 h-8 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-lg" />
               <span className="text-xl font-bold text-neutral-900">Zelvyn</span>
             </Link>
             <H2 className="mb-2">Create Account</H2>
-            <Body className="text-neutral-600">Join our community of artists and art lovers</Body>
+            <Body className="text-neutral-600">
+              Join our community of artists and art lovers
+            </Body>
           </div>
 
           {/* User Type Selection */}
           <div className="mb-6">
-            <Caption className="block mb-3 text-neutral-700 font-medium">I am a:</Caption>
+            <Caption className="block mb-3 text-neutral-700 font-medium">
+              I am a:
+            </Caption>
             <div className="grid grid-cols-2 gap-3">
               <button
                 type="button"
@@ -185,19 +202,26 @@ export default function SignupPage() {
           </div>
 
           {/* Google Signup */}
-          <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-            <div className="mb-6">
-              <GoogleLogin
-                onSuccess={handleGoogleSignup}
-                onError={() => setErrors({ general: "Google signup failed" })}
-                size="large"
-                width="100%"
-                text="signup_with"
-                shape="rectangular"
-                theme="outline"
-              />
+          {GOOGLE_CLIENT_ID ? (
+            <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+              <div className="mb-6">
+                <GoogleLogin
+                  onSuccess={handleGoogleSignup}
+                  onError={() => setErrors({ general: "Google signup failed" })}
+                  size="large"
+                  text="signup_with"
+                  shape="rectangular"
+                  theme="outline"
+                />
+              </div>
+            </GoogleOAuthProvider>
+          ) : (
+            <div className="mb-6 p-3 bg-yellow-50 border border-yellow-200 rounded-xl">
+              <Caption className="text-yellow-600">
+                Google Sign-Up temporarily unavailable
+              </Caption>
             </div>
-          </GoogleOAuthProvider>
+          )}
 
           {/* Divider */}
           <div className="relative mb-6">
@@ -205,7 +229,9 @@ export default function SignupPage() {
               <div className="w-full border-t border-neutral-200" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-neutral-500">Or continue with email</span>
+              <span className="px-2 bg-white text-neutral-500">
+                Or continue with email
+              </span>
             </div>
           </div>
 
@@ -220,12 +246,22 @@ export default function SignupPage() {
               onChange={handleInputChange}
               error={errors.name}
               leftIcon={
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                  />
                 </svg>
               }
             />
-            
+
             <Input
               type="email"
               name="email"
@@ -235,14 +271,23 @@ export default function SignupPage() {
               onChange={handleInputChange}
               error={errors.email}
               leftIcon={
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+                  />
                 </svg>
               }
             />
-            
-            <Input
-              type="password"
+
+            <PasswordInput
               name="password"
               label="Password"
               placeholder="Create a password"
@@ -250,14 +295,23 @@ export default function SignupPage() {
               onChange={handleInputChange}
               error={errors.password}
               leftIcon={
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                  />
                 </svg>
               }
             />
-            
-            <Input
-              type="password"
+
+            <PasswordInput
               name="confirmPassword"
               label="Confirm Password"
               placeholder="Confirm your password"
@@ -265,8 +319,18 @@ export default function SignupPage() {
               onChange={handleInputChange}
               error={errors.confirmPassword}
               leftIcon={
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                  />
                 </svg>
               }
             />

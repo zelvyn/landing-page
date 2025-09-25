@@ -30,7 +30,10 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
         
         <div className="relative">
           {leftIcon && (
-            <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400">
+            <div className={cn(
+              "absolute left-3 top-1/2 transform -translate-y-1/2 transition-colors duration-200",
+              isFocused ? "text-primary-500" : "text-neutral-400"
+            )}>
               {leftIcon}
             </div>
           )}
