@@ -10,7 +10,12 @@ export interface User {
   username?: string;
   profileImage?: string;
   userType: "ARTIST" | "USER";
-  isVerified: boolean;
+  phone?: string;
+  emailVerified: boolean;
+  isActive: boolean;
+  provider?: string;
+  createdAt: string;
+  lastLogin?: string;
 }
 
 interface UserState {
@@ -56,37 +61,40 @@ export const useUserStore = create<UserState & UserActions>()(
   persist(
     (set, get) => ({
       ...initialState,
-      
+
       setUser: (user) =>
         set({
           user,
           isAuthenticated: !!user,
         }),
-      
+
       logout: () =>
         set({
           user: null,
           isAuthenticated: false,
           dashboardState: initialState.dashboardState,
         }),
-      
+
       setTheme: (theme) => set({ theme }),
-      
+
       updatePreferences: (newPreferences) =>
         set((state) => ({
           preferences: { ...state.preferences, ...newPreferences },
         })),
-      
+
       updateDashboardState: (newState) =>
         set((state) => ({
           dashboardState: { ...state.dashboardState, ...newState },
         })),
-      
+
       addRecentUpload: (uploadId) =>
         set((state) => ({
           dashboardState: {
             ...state.dashboardState,
-            recentUploads: [uploadId, ...state.dashboardState.recentUploads].slice(0, 10),
+            recentUploads: [
+              uploadId,
+              ...state.dashboardState.recentUploads,
+            ].slice(0, 10),
           },
         })),
     }),

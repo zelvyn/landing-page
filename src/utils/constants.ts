@@ -48,8 +48,33 @@ export const ROUTES = {
   VERIFY_OTP: "/auth/verify-otp",
   RESET_PASSWORD: "/auth/reset-password",
   DASHBOARD: "/dashboard",
+  PROFILE: "/profile",
+  SETTINGS: "/settings",
   ARTIST_PROFILE: (username: string) => `/artist/${username}`,
 } as const;
+
+export const PROFILE_MENU_ITEMS = [
+  {
+    id: "profile",
+    label: "Profile",
+    href: "/profile",
+    icon: "BsPerson",
+  },
+  {
+    id: "settings",
+    label: "Settings",
+    href: "/settings",
+    icon: "BsGear",
+  },
+  {
+    id: "logout",
+    label: "Logout",
+    href: "#",
+    icon: "BsBoxArrowRight",
+    action: "logout",
+    className: "text-red-600 hover:bg-red-50",
+  },
+] as const;
 
 export const ANIMATION_VARIANTS = {
   fadeIn: {

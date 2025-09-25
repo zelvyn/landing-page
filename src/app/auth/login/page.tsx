@@ -7,7 +7,7 @@ import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
 import { PasswordInput } from "@/components/PasswordInput";
-import { H2, Body, Caption, H1 } from "@/components/Typography";
+import { Body, Caption, H1 } from "@/components/Typography";
 import { useUserStore } from "@/store/useUserStore";
 import {
   handleGoogleAuth,

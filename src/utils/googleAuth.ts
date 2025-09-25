@@ -11,9 +11,15 @@ export interface GoogleUser {
   id: string;
   email: string;
   name: string;
-  picture: string;
+  username?: string;
+  profileImage?: string;
   userType: "ARTIST" | "USER";
-  isVerified: boolean;
+  phone?: string;
+  emailVerified: boolean;
+  isActive: boolean;
+  provider?: string;
+  createdAt: string;
+  lastLogin?: string;
 }
 
 export interface AuthResponse {
@@ -43,6 +49,7 @@ export const handleGoogleAuth = async (
         error: result.error || "Authentication failed",
       };
     }
+    console.log(result, "<<<>>>"); // --- IGNORE ---igigigig
 
     return {
       success: true,
