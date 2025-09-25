@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
@@ -14,7 +15,7 @@ export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,19 +34,22 @@ export default function ForgotPasswordPage() {
     setError("");
 
     try {
-      const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:8080';
-      const response = await fetch(`${BACKEND_URL}${API_ENDPOINTS.AUTH.FORGOT_PASSWORD}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
+      const BACKEND_URL = process.env.BACKEND_URL || "http://localhost:8080";
+      const response = await fetch(
+        `${BACKEND_URL}${API_ENDPOINTS.AUTH.FORGOT_PASSWORD}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email }),
+        }
+      );
 
       const result = await response.json();
 
       if (response.ok) {
-        setIsSuccess(true);
+        router.push(`${ROUTES.VERIFY_OTP}?email=${encodeURIComponent(email)}`);
       } else {
         setError(result.error || "Failed to send reset email");
       }
@@ -60,62 +64,6 @@ export default function ForgotPasswordPage() {
     setEmail(e.target.value);
     if (error) setError("");
   };
-
-  if (isSuccess) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-primary-50 to-secondary-50 flex items-center justify-center p-4">
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={ANIMATION_VARIANTS.stagger}
-          className="w-full max-w-md"
-        >
-          <motion.div
-            variants={ANIMATION_VARIANTS.slideUp}
-            className="bg-white rounded-3xl shadow-xl p-8 text-center"
-          >
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg
-                className="w-8 h-8 text-green-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-            </div>
-
-            <H2 className="mb-4 text-green-600">Check Your Email</H2>
-            <Body className="text-neutral-600 mb-6">
-              We've sent a password reset link to <strong>{email}</strong>.
-              Please check your email and follow the instructions to reset your
-              password.
-            </Body>
-
-            <div className="space-y-3">
-              <Link href={ROUTES.LOGIN}>
-                <Button className="w-full">Back to Login</Button>
-              </Link>
-              <button
-                onClick={() => {
-                  setIsSuccess(false);
-                  setEmail("");
-                }}
-                className="w-full text-primary-600 hover:text-primary-700 transition-colors duration-200 text-sm"
-              >
-                Try a different email
-              </button>
-            </div>
-          </motion.div>
-        </motion.div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-50 to-secondary-50 flex items-center justify-center p-4">
@@ -171,7 +119,7 @@ export default function ForgotPasswordPage() {
               size="lg"
               isLoading={isLoading}
             >
-              Send Reset Link
+              Send Reset OTP
             </Button>
           </form>
 

@@ -7,7 +7,7 @@ import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
 import { PasswordInput } from "@/components/PasswordInput";
-import { H2, Body, Caption } from "@/components/Typography";
+import { Body, Caption, H3 } from "@/components/Typography";
 import { useUserStore } from "@/store/useUserStore";
 import {
   handleGoogleAuth,
@@ -16,6 +16,7 @@ import {
 } from "@/utils/googleAuth";
 import { validateEmail, validatePassword } from "@/utils/helpers";
 import { ROUTES, ANIMATION_VARIANTS } from "@/utils/constants";
+import { Logo } from "@/components/Logo";
 
 export default function SignupPage() {
   const [formData, setFormData] = useState({
@@ -151,14 +152,8 @@ export default function SignupPage() {
         >
           {/* Header */}
           <div className="text-center mb-8">
-            <Link
-              href={ROUTES.HOME}
-              className="inline-flex items-center space-x-2 mb-6"
-            >
-              <div className="w-8 h-8 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-lg" />
-              <span className="text-xl font-bold text-neutral-900">Zelvyn</span>
-            </Link>
-            <H2 className="mb-2">Create Account</H2>
+            <Logo title />
+            <H3 className="mb-2">Create Account</H3>
             <Body className="text-neutral-600">
               Join our community of artists and art lovers
             </Body>

@@ -31,10 +31,12 @@ export const API_ENDPOINTS = {
     SIGNUP: "/api/auth/signup",
     GOOGLE: "/api/auth/google",
     FORGOT_PASSWORD: "/api/auth/forgot-password",
+    VERIFY_OTP: "/api/auth/verify-otp",
+    RESET_PASSWORD: "/api/auth/reset-password",
   },
   ARTIST: {
-    PROFILE: "/api/artist/profile",
-    ARTWORKS: "/api/artist/artworks",
+    PROFILE: "/api/auth/artist/profile",
+    ARTWORKS: "/api/auth/artist/artworks",
   },
 } as const;
 
@@ -43,6 +45,8 @@ export const ROUTES = {
   LOGIN: "/auth/login",
   SIGNUP: "/auth/signup",
   FORGOT_PASSWORD: "/auth/forgot-password",
+  VERIFY_OTP: "/auth/verify-otp",
+  RESET_PASSWORD: "/auth/reset-password",
   DASHBOARD: "/dashboard",
   ARTIST_PROFILE: (username: string) => `/artist/${username}`,
 } as const;
