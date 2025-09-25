@@ -50,6 +50,18 @@ export const ROUTES = {
   DASHBOARD: "/dashboard",
   PROFILE: "/profile",
   SETTINGS: "/settings",
+  TERMS: "/terms",
+  PRIVACY: "/privacy",
+  EXPLORE: "/explore",
+  ARTISTS: "/artists",
+  ABOUT: "/about",
+  FAVORITES: "/favorites",
+  COLLECTIONS: "/collections",
+  UPLOAD: "/upload",
+  ANALYTICS: "/analytics",
+  MESSAGES: "/messages",
+  NOTIFICATIONS: "/notifications",
+  UNAUTHORIZED: "/unauthorized",
   ARTIST_PROFILE: (username: string) => `/artist/${username}`,
 } as const;
 

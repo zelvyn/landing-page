@@ -11,6 +11,7 @@ import { Logo } from "./Logo";
 import { LogoutModal } from "./LogoutModal";
 import { ProfileMenu } from "./ProfileMenu";
 import { MobileProfileOverlay } from "./MobileProfileOverlay";
+import { NotificationModal } from "./NotificationModal";
 import { BsBell, BsPerson, BsGear, BsBoxArrowRight } from "react-icons/bs";
 
 export const Navbar = () => {
@@ -19,6 +20,7 @@ export const Navbar = () => {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [showMobileProfile, setShowMobileProfile] = useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
   const { user, isAuthenticated } = useUserStore();
 
   useEffect(() => {
@@ -86,7 +88,10 @@ export const Navbar = () => {
                 )}
 
                 {/* Notification Bell */}
-                <button className="relative p-2 text-neutral-600 hover:text-primary-600 transition-colors">
+                <button 
+                  onClick={() => setShowNotifications(!showNotifications)}
+                  className="relative p-2 text-neutral-600 hover:text-primary-600 transition-colors"
+                >
                   <BsBell className="w-6 h-6" />
                   <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                     3
@@ -103,11 +108,11 @@ export const Navbar = () => {
                       <img
                         src={user.profileImage}
                         alt={user?.name}
-                        className="w-8 h-8 rounded-full border-2 border-primary-200"
+                        className="w-10 h-10 rounded-full border-2 border-primary-200"
                       />
                     ) : (
-                      <div className="w-8 h-8 rounded-full border-2 border-primary-200 bg-neutral-100 flex items-center justify-center">
-                        <BsPerson className="w-4 h-4 text-neutral-600" />
+                      <div className="w-10 h-10 rounded-full border-2 border-primary-200 bg-neutral-100 flex items-center justify-center">
+                        <BsPerson className="w-5 h-5 text-neutral-600" />
                       </div>
                     )}
                   </button>
@@ -140,7 +145,10 @@ export const Navbar = () => {
             {isAuthenticated ? (
               <>
                 {/* Tablet Notification Bell */}
-                <button className="relative p-2 text-neutral-600 hover:text-primary-600 transition-colors">
+                <button 
+                  onClick={() => setShowNotifications(!showNotifications)}
+                  className="relative p-2 text-neutral-600 hover:text-primary-600 transition-colors"
+                >
                   <BsBell className="w-5 h-5" />
                   <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
                     3
@@ -157,11 +165,11 @@ export const Navbar = () => {
                       <img
                         src={user.profileImage}
                         alt={user?.name}
-                        className="w-7 h-7 rounded-full border-2 border-primary-200"
+                        className="w-9 h-9 rounded-full border-2 border-primary-200"
                       />
                     ) : (
-                      <div className="w-7 h-7 rounded-full border-2 border-primary-200 bg-neutral-100 flex items-center justify-center">
-                        <BsPerson className="w-3.5 h-3.5 text-neutral-600" />
+                      <div className="w-9 h-9 rounded-full border-2 border-primary-200 bg-neutral-100 flex items-center justify-center">
+                        <BsPerson className="w-4 h-4 text-neutral-600" />
                       </div>
                     )}
                   </button>
@@ -223,7 +231,10 @@ export const Navbar = () => {
             {isAuthenticated && (
               <>
                 {/* Mobile Notification Bell */}
-                <button className="relative p-2 text-neutral-600">
+                <button 
+                  onClick={() => setShowNotifications(!showNotifications)}
+                  className="relative p-2 text-neutral-600"
+                >
                   <BsBell className="w-5 h-5" />
                   <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
                     3
@@ -433,6 +444,12 @@ export const Navbar = () => {
         isOpen={showMobileProfile}
         onClose={() => setShowMobileProfile(false)}
         onLogout={handleLogout}
+      />
+
+      {/* Notification Modal */}
+      <NotificationModal
+        isOpen={showNotifications}
+        onClose={() => setShowNotifications(false)}
       />
 
       {/* Logout Modal */}
