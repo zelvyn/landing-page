@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { Button } from "@/components/Button";
@@ -8,7 +8,7 @@ import { H2, Body, Caption, H3 } from "@/components/Typography";
 import { ROUTES, ANIMATION_VARIANTS, API_ENDPOINTS } from "@/utils/constants";
 import { Logo } from "@/components/Logo";
 
-export default function VerifyOTPPage() {
+function VerifyOTPContent() {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -81,7 +81,7 @@ export default function VerifyOTPPage() {
       if (response.ok) {
         // Generate a temporary token or use email as identifier
         const tempToken = btoa(`${email}:${Date.now()}`);
-        router.push(`${ROUTES.RESET_PASSWORD}?token=${tempToken}&email=${encodeURIComponent(email)}`);
+        router.push(`${ROUTES.RESET_PASSWORD}?token=${tempToken}&email=${encodeURIComponent(email || '')}`);
       } else {
         console.error('OTP verification failed:', result);
         setError(result.error || result.message || "Invalid OTP");
@@ -162,5 +162,13 @@ export default function VerifyOTPPage() {
         </motion.div>
       </motion.div>
     </div>
+  );
+}
+
+export default function VerifyOTPPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <VerifyOTPContent />
+    </Suspense>
   );
 }

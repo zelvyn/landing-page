@@ -4,15 +4,16 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "./Button";
-import { H4 } from "./Typography";
 import { useUserStore } from "@/store/useUserStore";
 import { ROUTES } from "@/utils/constants";
 import { cn } from "@/utils/helpers";
 import { Logo } from "./Logo";
+import { LogoutModal } from "./LogoutModal";
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
   const { user, isAuthenticated, logout } = useUserStore();
 
   useEffect(() => {
@@ -30,36 +31,42 @@ export const Navbar = () => {
     { label: "About", href: "/about" },
   ];
 
+  const handleLogout = () => {
+    setShowLogoutModal(true);
+  };
+
   return (
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-2",
         isScrolled
-          ? "bg-white/80 backdrop-blur-md border-b border-neutral-200 shadow-sm"
-          : "bg-transparent"
+          ? "bg-gradient-to-r from-purple-50 via-blue-50 to-pink-50 backdrop-blur-md border-b border-neutral-200 shadow-lg"
+          : "bg-gradient-to-r from-purple-100/80 via-blue-100/80 to-pink-100/80 backdrop-blur-sm"
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href={ROUTES.HOME}>
-            <Logo size={"small"} />
+            <Logo size={"medium"} title />
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-neutral-700 hover:text-primary-600 transition-colors duration-200 font-medium"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
+          {/* Desktop Navigation - Only show when authenticated */}
+          {isAuthenticated && (
+            <div className="hidden md:flex items-center space-x-8">
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="text-neutral-700 hover:text-primary-600 transition-colors duration-200 font-medium"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          )}
 
           {/* Auth Buttons */}
           <div className="hidden md:flex items-center space-x-4">
@@ -82,7 +89,7 @@ export const Navbar = () => {
                   )}
                   <span className="text-sm text-neutral-700">{user?.name}</span>
                 </div>
-                <Button variant="outline" size="sm" onClick={logout}>
+                <Button variant="outline" size="sm" onClick={handleLogout}>
                   Logout
                 </Button>
               </div>
@@ -138,19 +145,24 @@ export const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-t border-neutral-200"
+            className="md:hidden bg-gradient-to-r from-purple-50 via-blue-50 to-pink-50 border-t border-neutral-200"
           >
             <div className="px-4 py-4 space-y-4">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="block text-neutral-700 hover:text-primary-600 transition-colors duration-200 font-medium"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {/* Mobile Navigation - Only show when authenticated */}
+              {isAuthenticated && (
+                <>
+                  {navItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="block text-neutral-700 hover:text-primary-600 transition-colors duration-200 font-medium"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </>
+              )}
 
               <div className="pt-4 border-t border-neutral-200 space-y-2">
                 {isAuthenticated ? (
@@ -166,7 +178,7 @@ export const Navbar = () => {
                       variant="outline"
                       size="sm"
                       className="w-full"
-                      onClick={logout}
+                      onClick={handleLogout}
                     >
                       Logout
                     </Button>
@@ -190,6 +202,12 @@ export const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Logout Modal */}
+      <LogoutModal
+        isOpen={showLogoutModal}
+        onClose={() => setShowLogoutModal(false)}
+      />
     </motion.nav>
   );
 };
