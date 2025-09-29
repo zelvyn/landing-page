@@ -48,7 +48,7 @@ export const LogoutModal = ({ isOpen, onClose }: LogoutModalProps) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[9999] p-4"
-          style={{ top: 0, left: 0, right: 0, bottom: 0, position: 'fixed' }}
+          style={{ top: 0, left: 0, right: 0, bottom: 0, position: "fixed" }}
           onClick={onClose}
         >
           <motion.div
@@ -60,7 +60,8 @@ export const LogoutModal = ({ isOpen, onClose }: LogoutModalProps) => {
           >
             <H4 className="mb-4 text-center">Confirm Logout</H4>
             <Body className="text-neutral-600 text-center mb-6">
-              Are you sure you want to logout? This will clear all your session data.
+              Are you sure you want to logout? This will clear all your session
+              data.
             </Body>
             <div className="flex space-x-3">
               <Button variant="outline" className="flex-1" onClick={onClose}>
@@ -78,6 +79,6 @@ export const LogoutModal = ({ isOpen, onClose }: LogoutModalProps) => {
         </motion.div>
       )}
     </AnimatePresence>,
-    document.body
+    document.body,
   );
 };

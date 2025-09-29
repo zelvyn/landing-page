@@ -11,10 +11,10 @@ interface ProtectedRouteProps {
   requireAuth?: boolean;
 }
 
-export const ProtectedRoute = ({ 
-  children, 
-  allowedRoles = ["ARTIST", "USER"], 
-  requireAuth = true 
+export const ProtectedRoute = ({
+  children,
+  allowedRoles = ["ARTIST", "USER"],
+  requireAuth = true,
 }: ProtectedRouteProps) => {
   const { user, isAuthenticated } = useUserStore();
   const router = useRouter();
@@ -46,8 +46,12 @@ export const ProtectedRoute = ({
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-red-600 mb-4">Access Denied</h1>
-          <p className="text-neutral-600">You don't have permission to access this page.</p>
+          <h1 className="text-2xl font-bold text-red-600 mb-4">
+            Access Denied
+          </h1>
+          <p className="text-neutral-600">
+            You don't have permission to access this page.
+          </p>
         </div>
       </div>
     );

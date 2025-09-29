@@ -138,6 +138,6 @@ export const MobileProfileOverlay = ({
         </>
       )}
     </AnimatePresence>,
-    document.body
+    document.body,
   );
 };

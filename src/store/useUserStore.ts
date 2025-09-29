@@ -107,6 +107,6 @@ export const useUserStore = create<UserState & UserActions>()(
         preferences: state.preferences,
         dashboardState: state.dashboardState,
       }),
-    }
-  )
+    },
+  ),
 );

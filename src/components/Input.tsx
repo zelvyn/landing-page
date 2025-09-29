@@ -29,7 +29,7 @@ interface InputProps
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     { label, error, helperText, leftIcon, rightIcon, className, ...props },
-    ref
+    ref,
   ) => {
     const [isFocused, setIsFocused] = useState(false);
 
@@ -50,7 +50,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             <div
               className={cn(
                 "absolute left-3 top-1/2 transform -translate-y-1/2 transition-colors duration-200",
-                isFocused ? "text-primary-500" : "text-neutral-400"
+                isFocused ? "text-primary-500" : "text-neutral-400",
               )}
             >
               {leftIcon}
@@ -67,7 +67,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               leftIcon && "pl-10",
               rightIcon && "pr-10",
               error && "border-red-500 focus:ring-red-500",
-              className
+              className,
             )}
             {...props}
           />
@@ -85,7 +85,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             animate={{ opacity: 1, y: 0 }}
             className={cn(
               "mt-2 text-sm",
-              error ? "text-red-500" : "text-neutral-500"
+              error ? "text-red-500" : "text-neutral-500",
             )}
           >
             {error || helperText}
@@ -93,7 +93,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         )}
       </div>
     );
-  }
+  },
 );
 
 Input.displayName = "Input";
@@ -138,7 +138,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           className={cn(
             "w-full px-4 py-3 rounded-2xl border border-neutral-200 bg-white text-neutral-900 placeholder-neutral-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none",
             error && "border-red-500 focus:ring-red-500",
-            className
+            className,
           )}
           {...props}
         />
@@ -149,7 +149,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             animate={{ opacity: 1, y: 0 }}
             className={cn(
               "mt-2 text-sm",
-              error ? "text-red-500" : "text-neutral-500"
+              error ? "text-red-500" : "text-neutral-500",
             )}
           >
             {error || helperText}
@@ -157,7 +157,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         )}
       </div>
     );
-  }
+  },
 );
 
 Textarea.displayName = "Textarea";

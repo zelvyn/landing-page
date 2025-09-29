@@ -41,7 +41,7 @@ export const ArtworkCard = ({
       transition={{ duration: 0.3 }}
       className={cn(
         "group bg-white rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden",
-        className
+        className,
       )}
     >
       {/* Image */}
@@ -52,10 +52,10 @@ export const ArtworkCard = ({
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-300"
         />
-        
+
         {/* Overlay */}
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300" />
-        
+
         {/* Like Button */}
         <motion.button
           whileHover={{ scale: 1.1 }}
@@ -66,7 +66,7 @@ export const ArtworkCard = ({
           <svg
             className={cn(
               "w-5 h-5 transition-colors duration-200",
-              isLiked ? "text-red-500 fill-current" : "text-neutral-600"
+              isLiked ? "text-red-500 fill-current" : "text-neutral-600",
             )}
             fill={isLiked ? "currentColor" : "none"}
             stroke="currentColor"
@@ -96,7 +96,7 @@ export const ArtworkCard = ({
         <H5 className="mb-2 line-clamp-2 group-hover:text-primary-600 transition-colors duration-200">
           {title}
         </H5>
-        
+
         <Link
           href={`/artist/${artist.username}`}
           className="flex items-center space-x-3 mb-4 group/artist"
@@ -124,18 +124,27 @@ export const ArtworkCard = ({
         {/* Stats */}
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-1">
-            <svg className="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+            <svg
+              className="w-4 h-4 text-red-500"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
               <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
             </svg>
             <Caption className="text-neutral-500">{likes}</Caption>
           </div>
-          
+
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="text-primary-600 hover:text-primary-700 transition-colors duration-200"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"

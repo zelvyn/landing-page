@@ -19,7 +19,11 @@ const iconMap = {
   BsBoxArrowRight,
 };
 
-export const ProfileMenu = ({ isOpen, onClose, onLogout }: ProfileMenuProps) => {
+export const ProfileMenu = ({
+  isOpen,
+  onClose,
+  onLogout,
+}: ProfileMenuProps) => {
   const { user } = useUserStore();
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -31,16 +35,16 @@ export const ProfileMenu = ({ isOpen, onClose, onLogout }: ProfileMenuProps) => 
     };
 
     if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isOpen, onClose]);
 
-  const handleItemClick = (item: typeof PROFILE_MENU_ITEMS[number]) => {
-    if ('action' in item && item.action === "logout") {
+  const handleItemClick = (item: (typeof PROFILE_MENU_ITEMS)[number]) => {
+    if ("action" in item && item.action === "logout") {
       onLogout();
     }
     onClose();
@@ -65,14 +69,15 @@ export const ProfileMenu = ({ isOpen, onClose, onLogout }: ProfileMenuProps) => 
           {/* Menu Items */}
           {PROFILE_MENU_ITEMS.map((item) => {
             const IconComponent = iconMap[item.icon as keyof typeof iconMap];
-            
-            if ('action' in item && item.action === "logout") {
+
+            if ("action" in item && item.action === "logout") {
               return (
                 <button
                   key={item.id}
                   onClick={() => handleItemClick(item)}
                   className={`flex items-center w-full px-4 py-2 text-sm ${
-                    ('className' in item ? item.className : null) || "text-neutral-700 hover:bg-neutral-50"
+                    ("className" in item ? item.className : null) ||
+                    "text-neutral-700 hover:bg-neutral-50"
                   }`}
                 >
                   <IconComponent className="w-4 h-4 mr-3" />
@@ -87,7 +92,8 @@ export const ProfileMenu = ({ isOpen, onClose, onLogout }: ProfileMenuProps) => 
                 href={item.href}
                 onClick={() => handleItemClick(item)}
                 className={`flex items-center px-4 py-2 text-sm ${
-                  ('className' in item ? item.className : null) || "text-neutral-700 hover:bg-neutral-50"
+                  ("className" in item ? item.className : null) ||
+                  "text-neutral-700 hover:bg-neutral-50"
                 }`}
               >
                 <IconComponent className="w-4 h-4 mr-3" />

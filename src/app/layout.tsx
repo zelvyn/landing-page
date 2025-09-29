@@ -6,8 +6,16 @@ export const metadata: Metadata = {
     default: "Zelvyn - Where Art Meets Digital Innovation",
     template: "%s | Zelvyn",
   },
-  description: "Discover extraordinary digital art, connect with talented artists, and own unique pieces that inspire. Join the future of art collecting and creation.",
-  keywords: ["digital art", "NFT", "artists", "marketplace", "art collection", "creative platform"],
+  description:
+    "Discover extraordinary digital art, connect with talented artists, and own unique pieces that inspire. Join the future of art collecting and creation.",
+  keywords: [
+    "digital art",
+    "NFT",
+    "artists",
+    "marketplace",
+    "art collection",
+    "creative platform",
+  ],
   authors: [{ name: "Zelvyn Team" }],
   creator: "Zelvyn",
   publisher: "Zelvyn",
@@ -25,7 +33,8 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://zelvyn.com",
     title: "Zelvyn - Where Art Meets Digital Innovation",
-    description: "Discover extraordinary digital art, connect with talented artists, and own unique pieces that inspire.",
+    description:
+      "Discover extraordinary digital art, connect with talented artists, and own unique pieces that inspire.",
     siteName: "Zelvyn",
     images: [
       {
@@ -39,7 +48,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Zelvyn - Where Art Meets Digital Innovation",
-    description: "Discover extraordinary digital art, connect with talented artists, and own unique pieces that inspire.",
+    description:
+      "Discover extraordinary digital art, connect with talented artists, and own unique pieces that inspire.",
     images: ["/og-image.jpg"],
     creator: "@zelvyn",
   },
@@ -66,9 +76,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="font-sans antialiased">
-        {children}
-      </body>
+      <body className="font-sans antialiased">{children}</body>
     </html>
   );
 }

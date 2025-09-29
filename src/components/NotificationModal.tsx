@@ -169,6 +169,6 @@ export const NotificationModal = ({
         </>
       )}
     </AnimatePresence>,
-    document.body
+    document.body,
   );
 };

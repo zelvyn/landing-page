@@ -6,7 +6,7 @@ import { ArtistProfile } from "./ArtistProfile";
 const getArtistData = async (username: string) => {
   // Simulate API call
   const artists = {
-    "alexchen": {
+    alexchen: {
       id: "1",
       name: "Alex Chen",
       username: "alexchen",

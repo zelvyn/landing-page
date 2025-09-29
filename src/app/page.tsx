@@ -130,9 +130,9 @@ export default function Home() {
             className="relative max-w-4xl mx-auto"
           >
             <div className="aspect-video rounded-3xl shadow-2xl overflow-hidden relative">
-              <Image 
-                src={FEATURED_IMAGE} 
-                alt="Featured Artists" 
+              <Image
+                src={FEATURED_IMAGE}
+                alt="Featured Artists"
                 fill
                 className="object-cover"
               />

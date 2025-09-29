@@ -63,7 +63,7 @@ export default function LoginPage() {
       const result = await handleEmailAuth(
         formData.email,
         formData.password,
-        "login"
+        "login",
       );
 
       if (result.success && result.user) {
@@ -88,7 +88,7 @@ export default function LoginPage() {
     try {
       const result = await handleGoogleAuth(
         credentialResponse.credential,
-        "USER"
+        "USER",
       );
 
       if (result.success && result.user) {

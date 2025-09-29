@@ -95,7 +95,7 @@ export default function SignupPage() {
         {
           name: formData.name,
           userType: formData.userType,
-        }
+        },
       );
 
       if (result.success && result.user) {
@@ -121,7 +121,7 @@ export default function SignupPage() {
     try {
       const result = await handleGoogleAuth(
         credentialResponse.credential,
-        formData.userType
+        formData.userType,
       );
 
       if (result.success && result.user) {

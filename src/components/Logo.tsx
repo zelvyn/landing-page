@@ -10,7 +10,7 @@ interface LogoProps {
 }
 
 const getSizeValue = (
-  size: number | "small" | "medium" | "large" | undefined
+  size: number | "small" | "medium" | "large" | undefined,
 ): number => {
   if (typeof size === "number") return size;
   switch (size) {

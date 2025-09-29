@@ -57,33 +57,36 @@ function VerifyOTPContent() {
     setError("");
 
     try {
-      const BACKEND_URL = process.env.BACKEND_URL || "http://localhost:8080";
+      const BACKEND_PROD_URL =
+        process.env.BACKEND_PROD_URL || "http://localhost:8080";
       const requestData = { email, otp: otpCode };
-      console.log('Sending to backend:', {
-        url: `${BACKEND_URL}${API_ENDPOINTS.AUTH.VERIFY_OTP}`,
-        data: requestData
+      console.log("Sending to backend:", {
+        url: `${BACKEND_PROD_URL}${API_ENDPOINTS.AUTH.VERIFY_OTP}`,
+        data: requestData,
       });
-      
+
       const response = await fetch(
-        `${BACKEND_URL}${API_ENDPOINTS.AUTH.VERIFY_OTP}`,
+        `${BACKEND_PROD_URL}${API_ENDPOINTS.AUTH.VERIFY_OTP}`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(requestData),
-        }
+        },
       );
 
       const result = await response.json();
-      console.log('Backend response:', { status: response.status, result });
+      console.log("Backend response:", { status: response.status, result });
 
       if (response.ok) {
         // Generate a temporary token or use email as identifier
         const tempToken = btoa(`${email}:${Date.now()}`);
-        router.push(`${ROUTES.RESET_PASSWORD}?token=${tempToken}&email=${encodeURIComponent(email || '')}`);
+        router.push(
+          `${ROUTES.RESET_PASSWORD}?token=${tempToken}&email=${encodeURIComponent(email || "")}`,
+        );
       } else {
-        console.error('OTP verification failed:', result);
+        console.error("OTP verification failed:", result);
         setError(result.error || result.message || "Invalid OTP");
       }
     } catch (error) {
@@ -167,7 +170,13 @@ function VerifyOTPContent() {
 
 export default function VerifyOTPPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          Loading...
+        </div>
+      }
+    >
       <VerifyOTPContent />
     </Suspense>
   );

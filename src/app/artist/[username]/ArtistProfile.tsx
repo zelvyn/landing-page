@@ -66,7 +66,7 @@ export const ArtistProfile = ({ artist }: ArtistProfileProps) => {
   return (
     <div className="min-h-screen bg-neutral-50">
       <Navbar />
-      
+
       {/* Cover Image */}
       <div className="relative h-64 md:h-80 lg:h-96 mt-16">
         <Image
@@ -109,14 +109,33 @@ export const ArtistProfile = ({ artist }: ArtistProfileProps) => {
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                   <div>
                     <H1 className="mb-2">{artist.name}</H1>
-                    <Caption className="text-neutral-500 mb-2">@{artist.username}</Caption>
-                    <Body className="text-neutral-600 mb-4 max-w-2xl">{artist.bio}</Body>
-                    
+                    <Caption className="text-neutral-500 mb-2">
+                      @{artist.username}
+                    </Caption>
+                    <Body className="text-neutral-600 mb-4 max-w-2xl">
+                      {artist.bio}
+                    </Body>
+
                     <div className="flex items-center gap-4 text-sm text-neutral-500">
                       <div className="flex items-center gap-1">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                          />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                          />
                         </svg>
                         {artist.location}
                       </div>
@@ -126,8 +145,18 @@ export const ArtistProfile = ({ artist }: ArtistProfileProps) => {
                         rel="noopener noreferrer"
                         className="flex items-center gap-1 hover:text-primary-600 transition-colors"
                       >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                          />
                         </svg>
                         Website
                       </a>
@@ -142,9 +171,7 @@ export const ArtistProfile = ({ artist }: ArtistProfileProps) => {
                     >
                       {isFollowing ? "Following" : "Follow"}
                     </Button>
-                    <Button variant="outline">
-                      Message
-                    </Button>
+                    <Button variant="outline">Message</Button>
                   </div>
                 </div>
               </div>
@@ -162,7 +189,10 @@ export const ArtistProfile = ({ artist }: ArtistProfileProps) => {
               { label: "Artworks", value: artist.stats.artworks },
               { label: "Sales", value: artist.stats.sales },
             ].map((stat) => (
-              <div key={stat.label} className="bg-white rounded-2xl p-6 text-center shadow-sm">
+              <div
+                key={stat.label}
+                className="bg-white rounded-2xl p-6 text-center shadow-sm"
+              >
                 <div className="text-2xl font-bold text-neutral-900 mb-1">
                   {formatNumber(stat.value)}
                 </div>
@@ -182,7 +212,11 @@ export const ArtistProfile = ({ artist }: ArtistProfileProps) => {
               rel="noopener noreferrer"
               className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-all duration-200 hover:scale-105"
             >
-              <svg className="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
+              <svg
+                className="w-5 h-5 text-blue-500"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
                 <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
               </svg>
             </a>
@@ -192,7 +226,11 @@ export const ArtistProfile = ({ artist }: ArtistProfileProps) => {
               rel="noopener noreferrer"
               className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-all duration-200 hover:scale-105"
             >
-              <svg className="w-5 h-5 text-pink-500" fill="currentColor" viewBox="0 0 24 24">
+              <svg
+                className="w-5 h-5 text-pink-500"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
                 <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987s11.987-5.367 11.987-11.987C24.014 5.367 18.647.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.895 3.708 13.744 3.708 12.447s.49-2.448 1.297-3.323c.875-.807 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.807.875 1.297 2.026 1.297 3.323s-.49 2.448-1.297 3.323c-.875.807-2.026 1.297-3.323 1.297zm7.718-1.297c-.875.807-2.026 1.297-3.323 1.297s-2.448-.49-3.323-1.297c-.807-.875-1.297-2.026-1.297-3.323s.49-2.448 1.297-3.323c.875-.807 2.026-1.297 3.323-1.297s2.448.49 3.323 1.297c.807.875 1.297 2.026 1.297 3.323s-.49 2.448-1.297 3.323z" />
               </svg>
             </a>
@@ -205,7 +243,11 @@ export const ArtistProfile = ({ artist }: ArtistProfileProps) => {
           >
             <nav className="flex space-x-8">
               {[
-                { id: "artworks", label: "Artworks", count: artist.artworks.length },
+                {
+                  id: "artworks",
+                  label: "Artworks",
+                  count: artist.artworks.length,
+                },
                 { id: "collections", label: "Collections", count: 3 },
                 { id: "about", label: "About" },
               ].map((tab) => (
@@ -230,10 +272,7 @@ export const ArtistProfile = ({ artist }: ArtistProfileProps) => {
           </motion.div>
 
           {/* Content */}
-          <motion.div
-            variants={ANIMATION_VARIANTS.fadeIn}
-            key={activeTab}
-          >
+          <motion.div variants={ANIMATION_VARIANTS.fadeIn} key={activeTab}>
             {activeTab === "artworks" && (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {artist.artworks.map((artwork) => (
@@ -253,7 +292,9 @@ export const ArtistProfile = ({ artist }: ArtistProfileProps) => {
 
             {activeTab === "collections" && (
               <div className="text-center py-12">
-                <H3 className="mb-4 text-neutral-600">Collections Coming Soon</H3>
+                <H3 className="mb-4 text-neutral-600">
+                  Collections Coming Soon
+                </H3>
                 <Body className="text-neutral-500">
                   This artist hasn't created any collections yet.
                 </Body>
@@ -268,9 +309,10 @@ export const ArtistProfile = ({ artist }: ArtistProfileProps) => {
                     {artist.bio}
                   </Body>
                   <Body className="text-neutral-600 leading-relaxed">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor 
-                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
                   </Body>
                 </div>
               </div>
