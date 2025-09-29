@@ -1,6 +1,6 @@
 import Image from "next/image";
 import LOGO from "@/assets/images/zelvyn.png";
-import { H1, H2 } from "./Typography";
+import { H2 } from "./Typography";
 import Link from "next/link";
 import { ROUTES } from "@/utils/constants";
 interface LogoProps {

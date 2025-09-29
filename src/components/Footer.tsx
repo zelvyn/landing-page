@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { H4, Body, Caption } from "./Typography";
+import { H4, Body, BodySmall } from "./Typography";
 import { ROUTES } from "@/utils/constants";
 
 export const Footer = () => {
@@ -50,6 +50,8 @@ export const Footer = () => {
             <div className="flex space-x-4">
               <a
                 href="https://twitter.com/zelvyn"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-neutral-400 hover:text-white transition-colors duration-200"
                 aria-label="Twitter"
               >
@@ -63,6 +65,8 @@ export const Footer = () => {
               </a>
               <a
                 href="https://instagram.com/zelvyn"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-neutral-400 hover:text-white transition-colors duration-200"
                 aria-label="Instagram"
               >
@@ -100,18 +104,18 @@ export const Footer = () => {
         </div>
 
         <div className="border-t border-neutral-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <Caption className="text-neutral-400">
+          <BodySmall className="text-neutral-400">
             © {new Date().getFullYear()} Zelvyn. All rights reserved.
-          </Caption>
+          </BodySmall>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <Link
-              href="/privacy"
+              href={ROUTES.PRIVACY}
               className="text-neutral-400 hover:text-white transition-colors duration-200 text-sm"
             >
               Privacy Policy
             </Link>
             <Link
-              href="/terms"
+              href={ROUTES.TERMS}
               className="text-neutral-400 hover:text-white transition-colors duration-200 text-sm"
             >
               Terms of Service

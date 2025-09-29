@@ -50,7 +50,7 @@ export const Navbar = () => {
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-2",
         isScrolled
           ? "bg-gradient-to-r from-purple-50 via-blue-50 to-pink-50 backdrop-blur-md border-b border-neutral-200 shadow-lg"
-          : "bg-gradient-to-r from-purple-100/80 via-blue-100/80 to-pink-100/80 backdrop-blur-sm",
+          : "bg-gradient-to-r from-purple-100/80 via-blue-100/80 to-pink-100/80 backdrop-blur-sm"
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -323,7 +323,7 @@ export const Navbar = () => {
               <div
                 className={cn(
                   "space-y-3",
-                  isAuthenticated && "pt-4 border-t border-neutral-200",
+                  isAuthenticated && "pt-4 border-t border-neutral-200"
                 )}
               >
                 {isAuthenticated ? (
