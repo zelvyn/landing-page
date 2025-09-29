@@ -11,14 +11,14 @@ export async function POST(request: NextRequest) {
 
     // Call your backend service
     const backendResponse = await fetch(
-      `${process.env.BACKEND_PROD_URL}${API_ENDPOINTS.AUTH.GOOGLE}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_PROD_URL}${API_ENDPOINTS.AUTH.GOOGLE}`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ token, userType }),
-      },
+      }
     );
 
     const result = await backendResponse.json();
@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
     if (!backendResponse.ok) {
       return NextResponse.json(
         { error: result.error || "Authentication failed" },
-        { status: backendResponse.status },
+        { status: backendResponse.status }
       );
     }
 
@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
     console.error("Google auth error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

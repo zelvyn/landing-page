@@ -57,23 +57,22 @@ function VerifyOTPContent() {
     setError("");
 
     try {
-      const BACKEND_PROD_URL =
-        process.env.BACKEND_PROD_URL || "http://localhost:8080";
+      const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_PROD_URL;
       const requestData = { email, otp: otpCode };
       console.log("Sending to backend:", {
-        url: `${BACKEND_PROD_URL}${API_ENDPOINTS.AUTH.VERIFY_OTP}`,
+        url: `${BACKEND_URL}${API_ENDPOINTS.AUTH.VERIFY_OTP}`,
         data: requestData,
       });
 
       const response = await fetch(
-        `${BACKEND_PROD_URL}${API_ENDPOINTS.AUTH.VERIFY_OTP}`,
+        `${BACKEND_URL}${API_ENDPOINTS.AUTH.VERIFY_OTP}`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(requestData),
-        },
+        }
       );
 
       const result = await response.json();
@@ -83,7 +82,7 @@ function VerifyOTPContent() {
         // Generate a temporary token or use email as identifier
         const tempToken = btoa(`${email}:${Date.now()}`);
         router.push(
-          `${ROUTES.RESET_PASSWORD}?token=${tempToken}&email=${encodeURIComponent(email || "")}`,
+          `${ROUTES.RESET_PASSWORD}?token=${tempToken}&email=${encodeURIComponent(email || "")}`
         );
       } else {
         console.error("OTP verification failed:", result);

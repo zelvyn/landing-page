@@ -68,10 +68,9 @@ function ResetPasswordContent() {
     setErrors({});
 
     try {
-      const BACKEND_PROD_URL =
-        process.env.BACKEND_PROD_URL || "http://localhost:8080";
+      const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_PROD_URL;
       const response = await fetch(
-        `${BACKEND_PROD_URL}${API_ENDPOINTS.AUTH.RESET_PASSWORD}`,
+        `${BACKEND_URL}${API_ENDPOINTS.AUTH.RESET_PASSWORD}`,
         {
           method: "POST",
           headers: {
@@ -82,7 +81,7 @@ function ResetPasswordContent() {
             newPassword: formData.password,
             confirmPassword: formData.confirmPassword,
           }),
-        },
+        }
       );
 
       const result = await response.json();

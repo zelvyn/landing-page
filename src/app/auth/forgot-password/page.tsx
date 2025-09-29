@@ -34,17 +34,16 @@ export default function ForgotPasswordPage() {
     setError("");
 
     try {
-      const BACKEND_PROD_URL =
-        process.env.BACKEND_PROD_URL || "http://localhost:8080";
+      const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_PROD_URL;
       const response = await fetch(
-        `${BACKEND_PROD_URL}${API_ENDPOINTS.AUTH.FORGOT_PASSWORD}`,
+        `${BACKEND_URL}${API_ENDPOINTS.AUTH.FORGOT_PASSWORD}`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ email }),
-        },
+        }
       );
 
       const result = await response.json();
